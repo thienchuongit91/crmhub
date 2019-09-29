@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_intergration", "api_intergration\api_intergration.csproj", "{BE532623-7754-4F92-9F76-61C9ED6EFFE9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crm_data_hub", "crm_data_hub\crm_data_hub.csproj", "{F575B1F7-0758-47F9-85A6-A9EC0E98430F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_intergration", "api_intergration.csproj", "{BE532623-7754-4F92-9F76-61C9ED6EFFE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,15 +15,11 @@ Global
 		{BE532623-7754-4F92-9F76-61C9ED6EFFE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE532623-7754-4F92-9F76-61C9ED6EFFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE532623-7754-4F92-9F76-61C9ED6EFFE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F575B1F7-0758-47F9-85A6-A9EC0E98430F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F575B1F7-0758-47F9-85A6-A9EC0E98430F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F575B1F7-0758-47F9-85A6-A9EC0E98430F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F575B1F7-0758-47F9-85A6-A9EC0E98430F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {89412FD0-D670-4AD9-87DE-369B17FCCE24}
+		SolutionGuid = {95D9020F-A2D1-42DD-8CBB-D1D27965AC13}
 	EndGlobalSection
 EndGlobal
