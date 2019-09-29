@@ -12,7 +12,6 @@ namespace crm_data_hub.Hubs
     {
         private static string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
 
-        [HubMethodName("DBChangedTrigger")]
         public static void DbChangeTrigger()
         {
 
