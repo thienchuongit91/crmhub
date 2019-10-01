@@ -105,6 +105,13 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Web.config_Standard" />
+    <None Include="Web.Debug.config_Standard">
+      <DependentUpon>Web.config_Standard</DependentUpon>
+    </None>
+    <None Include="Web.Release.config_Standard">
+      <DependentUpon>Web.config_Standard</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
