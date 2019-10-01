@@ -10,11 +10,11 @@ namespace crm_data_hub.Hubs
 {
     public class DbChangedHub : Hub
     {
-        private static string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-
+        [HubMethodName("DbChangeTrigger")]
         public static void DbChangeTrigger()
         {
-
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<DbChangedHub>();
+            context.Clients.All.GetLatestData();
         }
     }
 }
