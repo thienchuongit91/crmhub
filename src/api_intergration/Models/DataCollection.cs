@@ -20,6 +20,19 @@ namespace api_intergration.Models
         [Required]
         public string data { get; set; }
 
+        [Column("IsSendToSHB")]
+        [Required]
+        public Boolean IsSendToSHB { get; set; }
+
+        [Column("Created_Date")]
+        [Required]
+        public DateTime Created_Date { get; set; }
+
+        [Column("Modified_Date")]
+        [Required]
+        public DateTime Modified_Date { get; set; }
+
+
     }
     public class DataCollectionDbContext : DbContext
     {
