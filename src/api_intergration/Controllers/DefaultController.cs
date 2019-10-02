@@ -15,15 +15,6 @@ namespace api_intergration.Controllers
     public class DefaultController : ApiController
     {
         [HttpPost]
-        [Route("api/shb/checklead")]
-        public async Task<string> CheckLeadAsync([FromBody] string jsonObj)
-        {
-            SHBFCHandlers handlers = new SHBFCHandlers();
-            var result = await handlers.CheckLeadAsync(jsonObj);
-            return result;
-        }
-
-        [HttpPost]
         [Route("api/datahub/collect")]
         public HttpResponseMessage DataCollection([FromBody] dynamic jsonStringObj)
         {
@@ -37,12 +28,18 @@ namespace api_intergration.Controllers
                     if (headers.GetValues("client_id").FirstOrDefault() == "eac5d782-3a48-4a23-ae97-002681dc4dfd" && headers.GetValues("client_secret").FirstOrDefault() == "182548a4d4b34e9aaee83380730f4152")
                     {
                         string jsonString = JsonConvert.SerializeObject(jsonStringObj);
+
+                        //create history data
                         var currentdate = DateTime.Now;
                         DataCollection dataCollection = new DataCollection();
                         dataCollection.data = jsonString;
                         dataCollection.IsSendToSHB = false;
                         dataCollection.Created_Date = currentdate;
                         dataCollection.Modified_Date = currentdate;
+
+                        //call SHBFC
+                        string responseSHB = SHBFCHandlers.CallLeadAPI(jsonString);
+
                         dbContext.dataCollections.Add(dataCollection);
                         dbContext.SaveChanges();
                         int dataid = dataCollection.id;
@@ -66,7 +63,7 @@ namespace api_intergration.Controllers
             }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Errors");
                 return response;
             }
            
