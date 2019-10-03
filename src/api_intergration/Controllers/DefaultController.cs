@@ -27,6 +27,11 @@ namespace api_intergration.Controllers
                 {
                     if (headers.GetValues("client_id").FirstOrDefault() == "eac5d782-3a48-4a23-ae97-002681dc4dfd" && headers.GetValues("client_secret").FirstOrDefault() == "182548a4d4b34e9aaee83380730f4152")
                     {
+                        if (jsonStringObj.action == null)
+                        {
+                            response = Request.CreateResponse(HttpStatusCode.BadRequest, "Missing action in request body");
+                            return response;
+                        }
                         string jsonString = JsonConvert.SerializeObject(jsonStringObj);
 
                         //create history data
@@ -36,10 +41,6 @@ namespace api_intergration.Controllers
                         dataCollection.IsSendToSHB = false;
                         dataCollection.Created_Date = currentdate;
                         dataCollection.Modified_Date = currentdate;
-
-                        //call SHBFC
-                        string responseSHB = SHBFCHandlers.CallLeadAPI(jsonString);
-
                         dbContext.dataCollections.Add(dataCollection);
                         dbContext.SaveChanges();
                         int dataid = dataCollection.id;
