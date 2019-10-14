@@ -104,8 +104,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\GenerateQRCode.cs" />
+    <Compile Include="Handlers\MailHandlers.cs" />
+    <Compile Include="Handlers\QRCodeHandlers.cs" />
     <Compile Include="Handlers\SHBFCHandlers.cs" />
+    <Compile Include="Handlers\VCBHandlers.cs" />
     <Compile Include="Models\DataCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
