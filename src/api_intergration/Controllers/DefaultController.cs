@@ -9,6 +9,7 @@ using System.Web.Http;
 using api_intergration.Handlers;
 using Newtonsoft.Json;
 using api_intergration.Models;
+using System.Drawing;
 
 namespace api_intergration.Controllers
 {
@@ -32,6 +33,18 @@ namespace api_intergration.Controllers
                             response = Request.CreateResponse(HttpStatusCode.BadRequest, "Missing action in request body");
                             return response;
                         }
+                        else if(jsonStringObj.action == "Add")
+                        {
+                            string cmnd = jsonStringObj.data.CMND;
+                            string email = jsonStringObj.data.Email;
+                            if (!string.IsNullOrEmpty(cmnd) && !string.IsNullOrEmpty(email))
+                            {
+                                Bitmap qrCode = QRCodeHandlers.GenerateQRCode(cmnd);
+                                MailHandlers.SendMail(email, qrCode);
+                                VCBHandlers.sendInfo(cmnd);
+                            }
+                        }
+
                         string jsonString = JsonConvert.SerializeObject(jsonStringObj);
 
                         //create history data

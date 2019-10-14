@@ -51,6 +51,9 @@
       <HintPath>packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="QRCoder, Version=1.3.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\QRCoder.1.3.6\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=104.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.104.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -101,6 +104,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\GenerateQRCode.cs" />
     <Compile Include="Handlers\SHBFCHandlers.cs" />
     <Compile Include="Models\DataCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
