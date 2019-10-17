@@ -41,8 +41,11 @@ namespace api_intergration.Controllers
                             {
                                 Bitmap qrCode = QRCodeHandlers.GenerateQRCode(cmnd);
                                 MailHandlers.SendMail(email, qrCode);
-                                VCBHandlers.sendInfo(cmnd);
                             }
+                        }
+                        if (jsonStringObj.data.CMND)
+                        {
+                            VCBHandlers.sendInfo(jsonStringObj.data.CMND);
                         }
 
                         string jsonString = JsonConvert.SerializeObject(jsonStringObj);
