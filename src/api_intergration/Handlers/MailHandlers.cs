@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Web;
 
@@ -28,11 +29,17 @@ namespace api_intergration.Handlers
                 mail.Body = "Cảm ơn quý khách đã đăng ký hồ sơ mới với FServices, đính kèm là mã QRcode của quý khách:";
                 mail.Attachments.Add(new Attachment(img, "image/jpg"));
 
-                SmtpServer.Port = mailPort;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
-                SmtpServer.EnableSsl = true;
+                //SmtpServer.Port = mailPort;
+                //SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
+                //SmtpServer.EnableSsl = true;
 
-                SmtpServer.Send(mail);
+                //SmtpServer.Send(mail);
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential("fservicedev.system@gmail.com", "1234567a@"),
+                    EnableSsl = true
+                };
+                client.Send(mail);
             }
             catch (Exception ex)
             {
