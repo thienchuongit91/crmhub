@@ -43,9 +43,10 @@ namespace api_intergration.Controllers
                                 MailHandlers.SendMail(email, qrCode);
                             }
                         }
-                        if (jsonStringObj.data.CMND)
+                        string cmnd2 = jsonStringObj.data.CMND;
+                        if (!string.IsNullOrEmpty(cmnd2))
                         {
-                            VCBHandlers.sendInfo(jsonStringObj.data.CMND);
+                            VCBHandlers.sendInfo(cmnd2);
                         }
 
                         string jsonString = JsonConvert.SerializeObject(jsonStringObj);
