@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 
 namespace api_intergration.Handlers
@@ -20,23 +21,29 @@ namespace api_intergration.Handlers
                 Byte[] b = (Byte[])ic.ConvertTo(qrCode, typeof(Byte[]));
                 MemoryStream img = new MemoryStream(b);
 
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                Attachment att = new Attachment(img, "image.jpg");
+                att.ContentDisposition.Inline = true;
 
-                mail.From = new MailAddress("ucchau@fservices.com.vn");
+                LinkedResource inline = new LinkedResource(img, MediaTypeNames.Image.Jpeg);
+                inline.ContentId = Guid.NewGuid().ToString();
+
+                MailMessage mail = new MailMessage();
+                string htmlBody = "<html><body><h1>Cảm ơn quý khách đã đăng ký hồ sơ mới với FServices.</h1><br><img src=\"cid:"+ inline.ContentId + "\"></body></html>";
+                AlternateView avHtml = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
+
+                avHtml.LinkedResources.Add(inline);
+                mail.AlternateViews.Add(avHtml);
+
+                mail.From = new MailAddress("cus_support@fservices.com.vn");
                 mail.To.Add(toEmail);
                 mail.Subject = "Chúc mừng quý khách đã đăng kí thành công với FServices!";
-                mail.Body = "Cảm ơn quý khách đã đăng ký hồ sơ mới với FServices, đính kèm là mã QRcode của quý khách:";
-                mail.Attachments.Add(new Attachment(img, "image/jpg"));
+                mail.Body = String.Format("Cảm ơn quý khách đã đăng ký hồ sơ mới với FServices." +
+                    @"<img src=""cid:{0}"" />", inline.ContentId);
+                mail.Attachments.Add(new Attachment(img, "image.jpg"));
 
-                //SmtpServer.Port = mailPort;
-                //SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
-                //SmtpServer.EnableSsl = true;
-
-                //SmtpServer.Send(mail);
-                var client = new SmtpClient("smtp.gmail.com", 587)
+                var client = new SmtpClient("mail.fservices.com.vn", 587)
                 {
-                    Credentials = new NetworkCredential("fservicedev.system@gmail.com", "1234567a@"),
+                    Credentials = new NetworkCredential("cus_support@fservices.com.vn", "FS.Ucchau10A"),
                     EnableSsl = true
                 };
                 client.Send(mail);
